@@ -1,7 +1,7 @@
             DO WHAT THE FUCK YOU WANT TO PUBLIC LICENSE
                     Version 1, December 2021
 
- Copyright (C) 2021 Jhon Doe <jhon@doe.net>
+ Copyright (C) 2021 YHWH Adams <cum@in.ass>
 
  Everyone is permitted to copy and distribute verbatim or modified
  copies of this license document, and changing it is allowed as long
