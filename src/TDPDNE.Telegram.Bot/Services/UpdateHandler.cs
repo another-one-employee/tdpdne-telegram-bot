@@ -1,4 +1,4 @@
-namespace TDPDNE.Telegram.Bot.Services;
+﻿namespace TDPDNE.Telegram.Bot.Services;
 
 using Abstract;
 using Exceptions;
@@ -18,6 +18,7 @@ public class UpdateHandler : IUpdateHandler
 
     private static readonly BotConfiguration BotConfiguration;
     private static readonly ITDPDNEWrapper Wrapper;
+    private static readonly Random Random;
 
     public UpdateHandler(ITelegramBotClient botClient, ILogger<UpdateHandler> logger)
     {
@@ -34,6 +35,7 @@ public class UpdateHandler : IUpdateHandler
         BotConfiguration = configuration.GetRequiredSection(BotConfiguration.Configuration).Get<BotConfiguration>() ??
                            throw new ArgumentNullException(BotConfiguration.Configuration);
         Wrapper = new TDPDNEWrapper(configuration);
+        Random = new Random();
     }
 
     public async Task HandleUpdateAsync(ITelegramBotClient _, Update update, CancellationToken cancellationToken)
@@ -58,10 +60,16 @@ public class UpdateHandler : IUpdateHandler
         {
             "/generate" => UploadPicture(_botClient, message, cancellationToken),
             "/support" => SendSupport(_botClient, message, cancellationToken),
+            "/donations" => SendDonations(_botClient, message, cancellationToken),
             _ => Usage(_botClient, message, cancellationToken)
         };
         var sentMessage = await action;
         _logger.LogInformation("The message was sent with id: {SentMessageId}", sentMessage.MessageId);
+        _logger.LogInformation("The message was sent by user: " +
+                               $"id - {sentMessage.Chat.Id}, " +
+                               $"username - {sentMessage.Chat.Username}, " +
+                               $"first name - {sentMessage.Chat.FirstName}, " +
+                               $"last name - {sentMessage.Chat.LastName}");
 
         static async Task<Message> UploadPicture(ITelegramBotClient botClient, Message message, CancellationToken cancellationToken)
         {
@@ -73,6 +81,10 @@ public class UpdateHandler : IUpdateHandler
             try
             {
                 var content = await Wrapper.GetPicture(cancellationToken);
+
+                // Emulation of generating
+                var delay = Random.Next(BotConfiguration.MinDelay, BotConfiguration.MaxDelay);
+                await Task.Delay(delay, cancellationToken);
 
                 return await botClient.SendPhotoAsync(
                     chatId: message.Chat.Id,
@@ -99,11 +111,23 @@ public class UpdateHandler : IUpdateHandler
                 cancellationToken: cancellationToken);
         }
 
+        static async Task<Message> SendDonations(ITelegramBotClient botClient, Message message, CancellationToken cancellationToken)
+        {
+            string text = "Donations:\n" +
+                          $"{BotConfiguration.Donations}";
+
+            return await botClient.SendTextMessageAsync(
+                chatId: message.Chat.Id,
+                text: text,
+                cancellationToken: cancellationToken);
+        }
+
         static async Task<Message> Usage(ITelegramBotClient botClient, Message message, CancellationToken cancellationToken)
         {
             const string usage = "Usage:\n" +
                                  "/generate - generate dickpic\n" +
-                                 "/support - support contact";
+                                 "/support - support contact\n" +
+                                 "/donations - links to donations";
 
             return await botClient.SendTextMessageAsync(
                 chatId: message.Chat.Id,

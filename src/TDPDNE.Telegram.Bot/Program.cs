@@ -3,6 +3,7 @@
 using global::Telegram.Bot;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Serilog;
 using TDPDNE.Telegram.Bot.Configs;
 using TDPDNE.Telegram.Bot.Services;
 
@@ -28,6 +29,9 @@ internal class Program
                 services.AddScoped<ReceiverService>();
                 services.AddHostedService<PollingService>();
             })
+            .UseSerilog((context, logger) => logger
+                .WriteTo.Console()
+                .ReadFrom.Configuration(context.Configuration))
             .Build();
 
         await host.RunAsync();
