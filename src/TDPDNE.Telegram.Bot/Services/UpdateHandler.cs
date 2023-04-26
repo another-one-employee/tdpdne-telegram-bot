@@ -1,22 +1,39 @@
 namespace TDPDNE.Telegram.Bot.Services;
 
+using Abstract;
+using Exceptions;
 using global::Telegram.Bot;
 using global::Telegram.Bot.Exceptions;
 using global::Telegram.Bot.Polling;
 using global::Telegram.Bot.Types;
 using global::Telegram.Bot.Types.Enums;
-using global::Telegram.Bot.Types.ReplyMarkups;
 using Microsoft.Extensions.Logging;
+using System;
+using TDPDNE.Telegram.Bot.Configs;
 
 public class UpdateHandler : IUpdateHandler
 {
     private readonly ITelegramBotClient _botClient;
     private readonly ILogger<UpdateHandler> _logger;
 
+    private static readonly BotConfiguration BotConfiguration;
+    private static readonly ITDPDNEWrapper Wrapper;
+
     public UpdateHandler(ITelegramBotClient botClient, ILogger<UpdateHandler> logger)
     {
         _botClient = botClient;
         _logger = logger;
+    }
+
+    static UpdateHandler()
+    {
+        var configuration = new ConfigurationBuilder()
+            .AddJsonFile("appsettings.json")
+            .Build();
+
+        BotConfiguration = configuration.GetRequiredSection(BotConfiguration.Configuration).Get<BotConfiguration>() ??
+                           throw new ArgumentNullException(BotConfiguration.Configuration);
+        Wrapper = new TDPDNEWrapper(configuration);
     }
 
     public async Task HandleUpdateAsync(ITelegramBotClient _, Update update, CancellationToken cancellationToken)
@@ -40,6 +57,7 @@ public class UpdateHandler : IUpdateHandler
         var action = messageText.Split(' ')[0] switch
         {
             "/generate" => UploadPicture(_botClient, message, cancellationToken),
+            "/support" => SendSupport(_botClient, message, cancellationToken),
             _ => Usage(_botClient, message, cancellationToken)
         };
         var sentMessage = await action;
@@ -52,25 +70,44 @@ public class UpdateHandler : IUpdateHandler
                 ChatAction.UploadPhoto,
                 cancellationToken: cancellationToken);
 
-            // TODO: generate
+            try
+            {
+                var content = await Wrapper.GetPicture(cancellationToken);
 
-            return await botClient.SendPhotoAsync(
+                return await botClient.SendPhotoAsync(
+                    chatId: message.Chat.Id,
+                    photo: new InputFile(content),
+                    cancellationToken: cancellationToken);
+            }
+            catch (ServiceUnavailableException)
+            {
+                return await botClient.SendTextMessageAsync(
+                    chatId: message.Chat.Id,
+                    text: "Service is temporarily unavailable",
+                    cancellationToken: cancellationToken);
+            }
+        }
+
+        static async Task<Message> SendSupport(ITelegramBotClient botClient, Message message, CancellationToken cancellationToken)
+        {
+            string text = "Support contact:\n" +
+                                 $"{BotConfiguration.SupportContact}";
+
+            return await botClient.SendTextMessageAsync(
                 chatId: message.Chat.Id,
-                // TODO: input file
-                photo: new InputFile(null),
-                caption: "Nice Picture",
+                text: text,
                 cancellationToken: cancellationToken);
         }
 
         static async Task<Message> Usage(ITelegramBotClient botClient, Message message, CancellationToken cancellationToken)
         {
             const string usage = "Usage:\n" +
-                                 "/generate - generate dickpic";
+                                 "/generate - generate dickpic\n" +
+                                 "/support - support contact";
 
             return await botClient.SendTextMessageAsync(
                 chatId: message.Chat.Id,
                 text: usage,
-                replyMarkup: new ReplyKeyboardRemove(),
                 cancellationToken: cancellationToken);
         }
     }
