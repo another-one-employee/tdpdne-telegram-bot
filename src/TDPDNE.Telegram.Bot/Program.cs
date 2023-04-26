@@ -3,6 +3,7 @@
 using global::Telegram.Bot;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using TDPDNE.Telegram.Bot.Configs;
 using TDPDNE.Telegram.Bot.Services;
 
 internal class Program
