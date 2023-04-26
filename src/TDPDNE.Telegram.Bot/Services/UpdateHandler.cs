@@ -18,7 +18,6 @@ public class UpdateHandler : IUpdateHandler
 
     private static readonly BotConfiguration BotConfiguration;
     private static readonly ITDPDNEWrapper Wrapper;
-    private static readonly Random Random;
 
     public UpdateHandler(ITelegramBotClient botClient, ILogger<UpdateHandler> logger)
     {
@@ -35,7 +34,6 @@ public class UpdateHandler : IUpdateHandler
         BotConfiguration = configuration.GetRequiredSection(BotConfiguration.Configuration).Get<BotConfiguration>() ??
                            throw new ArgumentNullException(BotConfiguration.Configuration);
         Wrapper = new TDPDNEWrapper(configuration);
-        Random = new Random();
     }
 
     public async Task HandleUpdateAsync(ITelegramBotClient _, Update update, CancellationToken cancellationToken)
@@ -81,10 +79,6 @@ public class UpdateHandler : IUpdateHandler
             try
             {
                 var content = await Wrapper.GetPicture(cancellationToken);
-
-                // Emulation of generating
-                var delay = Random.Next(BotConfiguration.MinDelay, BotConfiguration.MaxDelay);
-                await Task.Delay(delay, cancellationToken);
 
                 return await botClient.SendPhotoAsync(
                     chatId: message.Chat.Id,
