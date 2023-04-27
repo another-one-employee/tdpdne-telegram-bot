@@ -1,4 +1,4 @@
-namespace TDPDNE.Telegram.Bot.Services;
+﻿namespace TDPDNE.Telegram.Bot.Services;
 
 using Abstract;
 using Exceptions;
@@ -58,10 +58,16 @@ public class UpdateHandler : IUpdateHandler
         {
             "/generate" => UploadPicture(_botClient, message, cancellationToken),
             "/support" => SendSupport(_botClient, message, cancellationToken),
+            "/donations" => SendDonations(_botClient, message, cancellationToken),
             _ => Usage(_botClient, message, cancellationToken)
         };
         var sentMessage = await action;
         _logger.LogInformation("The message was sent with id: {SentMessageId}", sentMessage.MessageId);
+        _logger.LogInformation("The message was sent by user: " +
+                               $"id - {sentMessage.Chat.Id}, " +
+                               $"username - {sentMessage.Chat.Username}, " +
+                               $"first name - {sentMessage.Chat.FirstName}, " +
+                               $"last name - {sentMessage.Chat.LastName}");
 
         static async Task<Message> UploadPicture(ITelegramBotClient botClient, Message message, CancellationToken cancellationToken)
         {
@@ -99,11 +105,23 @@ public class UpdateHandler : IUpdateHandler
                 cancellationToken: cancellationToken);
         }
 
+        static async Task<Message> SendDonations(ITelegramBotClient botClient, Message message, CancellationToken cancellationToken)
+        {
+            string text = "Donations:\n" +
+                          $"{BotConfiguration.Donations}";
+
+            return await botClient.SendTextMessageAsync(
+                chatId: message.Chat.Id,
+                text: text,
+                cancellationToken: cancellationToken);
+        }
+
         static async Task<Message> Usage(ITelegramBotClient botClient, Message message, CancellationToken cancellationToken)
         {
             const string usage = "Usage:\n" +
                                  "/generate - generate dickpic\n" +
-                                 "/support - support contact";
+                                 "/support - support contact\n" +
+                                 "/donations - links to donations";
 
             return await botClient.SendTextMessageAsync(
                 chatId: message.Chat.Id,
