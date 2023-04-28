@@ -1,5 +1,5 @@
 # TDPDNE.Telegram.Bot
-![AppVeyor branch](https://img.shields.io/appveyor/build/Srul1k/tdpdne-telegram-bot/master?logo=appveyor) ![Downloads](https://img.shields.io/github/downloads/Srul1k/tdpdne-telegram-bot/1.0.0/total?color=blue&label=downloads) ![Visitor Badge](https://visitor-badge.feriirawann.repl.co?username=cum-foundations&repo=tdpdne-telegram-bot&color=blueviolet&style=for-the-badge&label=views&style=badge)
+![AppVeyor branch](https://img.shields.io/appveyor/build/Srul1k/tdpdne-telegram-bot/master?logo=appveyor) ![Downloads](https://img.shields.io/github/downloads/cum-foundations/tdpdne-telegram-bot/v1.0.0/total?color=blue&label=downloads) ![Visitor Badge](https://visitor-badge.feriirawann.repl.co?username=cum-foundations&repo=tdpdne-telegram-bot&color=blueviolet&style=for-the-badge&label=views&style=badge)
 
 This is a simple bot for generating dickpics.
 
