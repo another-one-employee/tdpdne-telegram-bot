@@ -3,6 +3,7 @@
 using Abstract;
 using Exceptions;
 using ImageMagick;
+using Serilog;
 using TDPDNE.Telegram.Bot.Configs;
 
 public class TDPDNEWrapper : ITDPDNEWrapper
@@ -17,7 +18,7 @@ public class TDPDNEWrapper : ITDPDNEWrapper
         _client = new HttpClient();
         _random = new Random();
         _logger = LoggerFactory
-            .Create(builder => builder.AddConsole())
+            .Create(builder => builder.AddSerilog())
             .CreateLogger<TDPDNEWrapper>();
         _configuration = configuration
             .GetRequiredSection(WrapperConfiguration.Configuration)
@@ -61,10 +62,10 @@ public class TDPDNEWrapper : ITDPDNEWrapper
         return id;
     }
 
-    private static Stream RemoveBlackBorder(Stream stream)
+    private Stream RemoveBlackBorder(Stream stream)
     {
         using var image = new MagickImage(stream: stream);
-        image.ColorFuzz = new Percentage(4);
+        image.ColorFuzz = new Percentage(_configuration.MagickFuzzPercentage);
         image.Trim();
         image.RePage();
         
