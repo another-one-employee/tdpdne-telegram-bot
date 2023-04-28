@@ -1,13 +1,15 @@
-# ![TDPDNE.Telegram.Bot](https://t.me/ThisDickpicDoesNotExistBot)
+# TDPDNE.Telegram.Bot
 ![AppVeyor branch](https://img.shields.io/appveyor/build/Srul1k/tdpdne-telegram-bot/master?logo=appveyor) ![Downloads](https://img.shields.io/github/downloads/Srul1k/tdpdne-telegram-bot/1.0.0/total?color=blue&label=downloads) ![Visitor Badge](https://visitor-badge.feriirawann.repl.co?username=cum-foundations&repo=tdpdne-telegram-bot&color=blueviolet&style=for-the-badge&label=views&style=badge)
 
 This is a simple bot for generating dickpics.
 
-⚠️ *Currently, the bot uses polling to receive updates from Telegram.
+❕ *Currently, the bot uses polling to receive updates from Telegram.
 Also, due to the inability to have good hardware and as a result of generating new dickpics, [this](https://api.thisdickpicdoesnotexist.com) API is temporarily used to get them.*
 
 <details>
 <summary> 🎞️ Presentation</summary>
+
+<br>
 
 ![Usage Example](res/usage-example.gif)
 
@@ -25,15 +27,17 @@ To launch the bot, you need to:
 2. Update *appsettings.json*:  
     * `"BotToken": "{BOT_TOKEN}"`  
     Replace `{BOT_TOKEN}` with your personal one received from [BotFather](https://t.me/BotFather)  
+
     * `"SupportContact": "{SUPPORT_CONTACT}"`  
     Replace `{SUPPORT_CONTACT}` with your contact information
+
     * `"Donations": "{DONATIONS}"`  
     Replace `{DONATIONS}` with your donations details  
 
     <br>
 
     <details>
-    <summary> (Not necessarily) Update WrapperConfiguration</summary>
+    <summary> 🔧(Not necessarily) Update WrapperConfiguration</summary>
 
     <br>
 
