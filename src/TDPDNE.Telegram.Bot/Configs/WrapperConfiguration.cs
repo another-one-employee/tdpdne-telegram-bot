@@ -8,6 +8,8 @@ public class WrapperConfiguration
 
     public string TDPDNEImageStorageUrl { get; set; } = "";
 
+    public int MagickFuzzPercentage { get; set; } = default;
+
     public int AttemptsMaxCount { get; set; } = 10;
 
     public int MinId { get; set; } = default;
