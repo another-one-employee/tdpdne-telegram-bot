@@ -29,9 +29,10 @@ internal class Program
                 services.AddScoped<ReceiverService>();
                 services.AddHostedService<PollingService>();
             })
-            .UseSerilog((context, logger) => logger
-                .WriteTo.Console()
-                .ReadFrom.Configuration(context.Configuration))
+            .UseSerilog((context, logger) =>
+            {
+                logger.ReadFrom.Configuration(context.Configuration);
+            })
             .Build();
 
         await host.RunAsync();
