@@ -1,0 +1,30 @@
+Name:
+----------------------------------------------
+Dickpics
+----------------------------------------------
+
+
+
+About:
+----------------------------------------------
+This is a simple bot for generating dickpics.
+----------------------------------------------
+
+
+
+Description:
+----------------------------------------------
+🍆 Generates Dickpics that never existed.
+
+📁 Source code:
+github.com/cum-foundations/tdpdne-telegram-bot
+----------------------------------------------
+
+
+
+Commands:
+----------------------------------------------
+generate - generate a new dickpic
+support - support contact
+donations - links to donations
+----------------------------------------------
