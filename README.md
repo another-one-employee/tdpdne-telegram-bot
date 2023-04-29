@@ -1,9 +1,9 @@
 # TDPDNE.Telegram.Bot
-![AppVeyor branch](https://img.shields.io/appveyor/build/Srul1k/tdpdne-telegram-bot/master?logo=appveyor) ![Downloads](https://img.shields.io/github/downloads/cum-foundations/tdpdne-telegram-bot/v1.0.0/total?color=blue&label=downloads) ![Visitor Badge](https://visitor-badge.feriirawann.repl.co?username=cum-foundations&repo=tdpdne-telegram-bot&color=blueviolet&style=for-the-badge&label=views&style=badge)
+![AppVeyor branch](https://img.shields.io/appveyor/build/Srul1k/tdpdne-telegram-bot/master?logo=appveyor) ![Downloads](https://img.shields.io/github/downloads/cum-foundations/tdpdne-telegram-bot/total?color=blue&label=downloads) ![Visitor Badge](https://visitor-badge.feriirawann.repl.co?username=cum-foundations&repo=tdpdne-telegram-bot&color=blueviolet&style=for-the-badge&label=views&style=badge)
 
 This is a simple bot for generating dickpics.
 
-❕ *Currently, the bot uses polling to receive updates from Telegram.
+❗️ *Currently, the bot uses polling to receive updates from Telegram.
 Also, due to the inability to have good hardware and as a result of generating new dickpics, [this](https://api.thisdickpicdoesnotexist.com) API is temporarily used to get them.*
 
 <details>
@@ -22,9 +22,9 @@ Also, due to the inability to have good hardware and as a result of generating n
 
 To launch the bot, you need to:
 
-1. Download the latest release
+1. ***Download*** the latest release
 
-2. Update *appsettings.json*:  
+2. ***Update*** *appsettings.json*:  
     * `"BotToken": "{BOT_TOKEN}"`  
     Replace `{BOT_TOKEN}` with your personal one received from [BotFather](https://t.me/BotFather)  
 
@@ -37,9 +37,11 @@ To launch the bot, you need to:
     <br>
 
     <details>
-    <summary> 🔧(Not necessarily) Update WrapperConfiguration</summary>
+    <summary> 🔧(Not necessarily)</summary>
 
     <br>
+
+    2.1 ***Update*** *WrapperConfiguration* section:
 
     * `TDPDNEApiUrl`  
     The URL of the API for getting dickpics ids.  
@@ -56,10 +58,10 @@ To launch the bot, you need to:
 
     </details>
 
-3. Launch TDPDNE.Telegram.Bot.exe *(or publish a new file to run on your OS if it's not Windows x64 and then run it)*
+3. ***Launch*** **TDPDNE.Telegram.Bot.exe** *(or publish a new file to run on your OS if it's not Windows x64 and then run it)*
 
-4. Tell your friends that you love dicks
+4. ***Tell*** your friends that you love dicks
 
-5. Enjoy! ✨
+5. ***Enjoy!*** ✨
 
 </details>
