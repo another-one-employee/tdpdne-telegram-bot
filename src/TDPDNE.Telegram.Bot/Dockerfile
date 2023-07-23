@@ -15,4 +15,4 @@ RUN dotnet publish "TDPDNE.Telegram.Bot.csproj" -c Release -o /app/publish /p:Us
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
-CMD ["TDPDNE.Telegram.Bot.exe"]
+ENTRYPOINT ["dotnet", "TDPDNE.Telegram.Bot.dll"]
