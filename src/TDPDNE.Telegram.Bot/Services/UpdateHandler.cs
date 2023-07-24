@@ -83,7 +83,7 @@ public class UpdateHandler : IUpdateHandler
 
                 return await botClient.SendPhotoAsync(
                     chatId: message.Chat.Id,
-                    photo: new InputFile(content),
+                    photo: InputFile.FromStream(content),
                     cancellationToken: cancellationToken);
             }
             catch (ServiceUnavailableException)
