@@ -6,7 +6,7 @@ public class BotConfiguration
 
     public string BotToken { get; set; } = "";
 
-    public string SupportContact { get; set; } = "";
+    public string Support { get; set; } = "";
 
     public string Donations { get; set; } = "";
 }

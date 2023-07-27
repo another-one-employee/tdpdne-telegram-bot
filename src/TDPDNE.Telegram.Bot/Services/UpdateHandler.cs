@@ -98,36 +98,43 @@ public class UpdateHandler : IUpdateHandler
 
         static async Task<Message> SendSupport(ITelegramBotClient botClient, Message message, CancellationToken cancellationToken)
         {
-            string text = "Support contact:\n" +
-                                 $"{BotConfiguration.SupportContact}";
+            string text = "*Support*:" + "\n" +
+                          $"{BotConfiguration.Support}";
+
+            text = text.Replace(@"\n", Environment.NewLine);  // for environment variables
 
             return await botClient.SendTextMessageAsync(
                 chatId: message.Chat.Id,
                 text: text,
+                parseMode: ParseMode.MarkdownV2,
                 cancellationToken: cancellationToken);
         }
 
         static async Task<Message> SendDonations(ITelegramBotClient botClient, Message message, CancellationToken cancellationToken)
         {
-            string text = "Donations:\n" +
+            string text = "*Donations*:" + "\n" +
                           $"{BotConfiguration.Donations}";
+
+            text = text.Replace(@"\n", Environment.NewLine);  // for environment variables
 
             return await botClient.SendTextMessageAsync(
                 chatId: message.Chat.Id,
                 text: text,
+                parseMode: ParseMode.MarkdownV2,
                 cancellationToken: cancellationToken);
         }
 
         static async Task<Message> Usage(ITelegramBotClient botClient, Message message, CancellationToken cancellationToken)
         {
-            const string usage = "Usage:\n" +
-                                 "/generate - generate dickpic\n" +
-                                 "/support - support contact\n" +
-                                 "/donations - links to donations";
+            const string usage = "*Usage*:\n" +
+                                 "/generate \\- _generate a new dickpic_\n" +
+                                 "/support \\- _support contacts_\n" +
+                                 "/donations \\- _links to donations_";
 
             return await botClient.SendTextMessageAsync(
                 chatId: message.Chat.Id,
                 text: usage,
+                parseMode: ParseMode.MarkdownV2,
                 cancellationToken: cancellationToken);
         }
     }
