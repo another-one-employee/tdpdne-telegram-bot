@@ -14,7 +14,9 @@ jobs:
       working-directory: src
 
     steps:
-    - uses: actions/checkout@v3
+    - name: Checkout repository
+      uses: actions/checkout@v3
+      
     - name: Setup .NET
       uses: actions/setup-dotnet@v3
       with:
@@ -23,6 +25,7 @@ jobs:
     - name: Restore dependencies
       working-directory: ${{env.working-directory}}
       run: dotnet restore
+      
     - name: Build
       working-directory: ${{env.working-directory}}
       run: dotnet build --no-restore
