@@ -3,6 +3,7 @@ WORKDIR /app
 
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /src
+COPY ["NuGet.Config", "."]
 COPY ["TDPDNE.Telegram.Bot/TDPDNE.Telegram.Bot.csproj", "TDPDNE.Telegram.Bot/"]
 RUN dotnet restore "TDPDNE.Telegram.Bot/TDPDNE.Telegram.Bot.csproj"
 COPY . .
