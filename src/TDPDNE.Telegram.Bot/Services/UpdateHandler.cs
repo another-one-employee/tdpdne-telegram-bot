@@ -30,11 +30,12 @@ public class UpdateHandler : IUpdateHandler
         var configuration = new ConfigurationBuilder()
             .AddJsonFile("appsettings.json", true)
             .AddJsonFile("appsettings.Development.json", true)
-            .AddEnvironmentVariables()
             .Build();
 
         BotConfiguration = configuration.GetRequiredSection(BotConfiguration.Configuration).Get<BotConfiguration>() ??
                            throw new ArgumentNullException(BotConfiguration.Configuration);
+        OverrideBotConfigurationFromEnvironmentVariables(BotConfiguration);
+
         Wrapper = new TDPDNEWrapper(configuration);
     }
 
@@ -98,10 +99,9 @@ public class UpdateHandler : IUpdateHandler
 
         static async Task<Message> SendSupport(ITelegramBotClient botClient, Message message, CancellationToken cancellationToken)
         {
-            string text = "*Support*:" + "\n" +
-                          $"{BotConfiguration.Support}";
-
-            text = text.Replace(@"\n", Environment.NewLine);  // for environment variables
+            string text = (@"*Support*:\n" +
+                          $"{BotConfiguration.Support}")
+                .Replace(@"\n", Environment.NewLine);
 
             return await botClient.SendTextMessageAsync(
                 chatId: message.Chat.Id,
@@ -112,10 +112,9 @@ public class UpdateHandler : IUpdateHandler
 
         static async Task<Message> SendDonations(ITelegramBotClient botClient, Message message, CancellationToken cancellationToken)
         {
-            string text = "*Donations*:" + "\n" +
-                          $"{BotConfiguration.Donations}";
-
-            text = text.Replace(@"\n", Environment.NewLine);  // for environment variables
+            string text = (@"*Donations*:\n" +
+                          $"{BotConfiguration.Donations}")
+                .Replace(@"\n", Environment.NewLine);
 
             return await botClient.SendTextMessageAsync(
                 chatId: message.Chat.Id,
@@ -158,5 +157,12 @@ public class UpdateHandler : IUpdateHandler
         // Cooldown in case of network connection error
         if (exception is RequestException)
             await Task.Delay(TimeSpan.FromSeconds(2), cancellationToken);
+    }
+
+    private static void OverrideBotConfigurationFromEnvironmentVariables(BotConfiguration botConfiguration)
+    {
+        botConfiguration.BotToken = Environment.GetEnvironmentVariable("BotConfiguration__BotToken") ?? botConfiguration.BotToken;
+        botConfiguration.Support = Environment.GetEnvironmentVariable("BotConfiguration__Support") ?? botConfiguration.Support;
+        botConfiguration.Donations = Environment.GetEnvironmentVariable("BotConfiguration__Donations") ?? botConfiguration.Donations;
     }
 }
