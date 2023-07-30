@@ -1,10 +1,48 @@
-# TDPDNE.Telegram.Bot
-![.NET build](https://github.com/cum-foundations/tdpdne-telegram-bot/actions/workflows/dotnet-build.yml/badge.svg) ![Docker image build](https://github.com/cum-foundations/tdpdne-telegram-bot/actions/workflows/docker-image-build.yml/badge.svg) ![Docker image publish](https://github.com/cum-foundations/tdpdne-telegram-bot/actions/workflows/docker-image-publish.yml/badge.svg) ![Latest Release](https://img.shields.io/github/release/cum-foundations/tdpdne-telegram-bot.svg?style=flat) ![Downloads](https://img.shields.io/github/downloads/cum-foundations/tdpdne-telegram-bot/total?color=blue&label=downloads) ![Visitor Badge](https://visitor-badge.feriirawann.repl.co?username=cum-foundations&repo=tdpdne-telegram-bot&color=blueviolet&style=for-the-badge&label=views&style=badge)
+<p align="center">
+    <img src="../res/logo.png"
+        height="148">
+</p>
 
-This is a simple bot for generating dickpics.
+<p align="center">
+    <a alt=".NET build">
+        <img src="https://github.com/cum-foundations/tdpdne-telegram-bot/actions/workflows/dotnet-build.yml/badge.svg" /></a>
+    <a alt="Docker image build">
+        <img src="https://github.com/cum-foundations/tdpdne-telegram-bot/actions/workflows/docker-image-build.yml/badge.svg" /></a>
+    <a alt="Latest Release">
+        <img src="https://img.shields.io/github/release/cum-foundations/tdpdne-telegram-bot.svg?style=flat&label=Release" /></a>
+</p>
 
-❗️ *Currently, the bot uses polling to receive updates from Telegram.
-Also, due to the inability to have good hardware and as a result of generating new dickpics, [this](https://api.thisdickpicdoesnotexist.com) API is temporarily used to get them.*
+<p align="center">
+    <a alt="Hits">
+        <img src="https://visitor-badge.feriirawann.repl.co?username=cum-foundations&repo=tdpdne-telegram-bot&color=salat&label=Hits&style=badge" /></a>
+    <a alt="Downloads">
+        <img src="https://img.shields.io/github/downloads/cum-foundations/tdpdne-telegram-bot/total?color=blue&label=Downloads" /></a>
+    <a href="https://t.me/cum_foundations">
+        <img src="https://img.shields.io/badge/C.U.M.%20News-2CA5E0?style=flat&logo=telegram&logoColor=white"
+            alt="Telegram channel"></a>
+</p>
+
+## This is a simple bot for generating dickpics.
+</p>
+
+<details>
+<summary> 🔔 Notice</summary>
+
+<br>
+
+- Currently, the bot uses **polling** to receive updates from Telegram.  
+- Due to the inability to have *good hardware* and as a result of generating new dickpics, [this](https://api.thisdickpicdoesnotexist.com) API is temporarily used to get them.
+
+</details>
+
+<details>
+<summary> ▶️ How to run</summary>
+
+- 🐳 [I'm familiar with Docker](how-to-run-with-docker.md)
+
+- 🖥️ [I don't know what Docker is](how-to-run-without-docker.md)
+
+</details>
 
 <details>
 <summary> 🎞️ Presentation</summary>
@@ -16,52 +54,12 @@ Also, due to the inability to have good hardware and as a result of generating n
 </details>
 
 <details>
-<summary> ▶️ How to use</summary>
+<summary> 💸 Donations</summary>
 
 <br>
 
-To launch the bot, you need to:
+*If you are not burdened and would like to help us practice [escapism](https://en.wikipedia.org/wiki/Escapism), we would be grateful for donations:*
 
-1. ***Download*** the latest release
-
-2. ***Update*** *appsettings.json*:  
-    * `"BotToken": "{BOT_TOKEN}"`  
-    Replace `{BOT_TOKEN}` with your personal one received from [BotFather](https://t.me/BotFather)  
-
-    * `"SupportContact": "{SUPPORT_CONTACT}"`  
-    Replace `{SUPPORT_CONTACT}` with your contact information
-
-    * `"Donations": "{DONATIONS}"`  
-    Replace `{DONATIONS}` with your donations details  
-
-    <br>
-
-    <details>
-    <summary> 🔧(Not necessarily)</summary>
-
-    <br>
-
-    2.1 ***Update*** *WrapperConfiguration* section:
-
-    * `TDPDNEApiUrl`  
-    The URL of the API for getting dickpics ids.  
-    * `TDPDNEImageStorageUrl`  
-    The URL of the API for getting dickpics images.  
-    * `MagickFuzzPercentage`  
-    Magick.NET configuration. Adjust the fuzz value as appropriate. But if you make it too large, your image will be trimmed too much.  
-    * `AttemptsMaxCount`  
-    The number of attempts to get the correct id for a dickpic. After the failure, the message *"Service is temporarily unavailable"* will be displayed.  
-    * `MinId`  
-    Minimum limit for obtaining a valid id.  
-    * `MaxId`  
-    Maximum limit for obtaining a valid id.  
-
-    </details>
-
-3. ***Launch*** **TDPDNE.Telegram.Bot.exe** *(or publish a new file to run on your OS if it's not Windows x64 and then run it)*
-
-4. ***Tell*** your friends that you love dicks
-
-5. ***Enjoy!*** ✨
+💎**Toncoin:** ```EQAq7lYMaMFPcnSvNe5V9XSPtaQy4J2YNMYArGRi3w-VrsuM```
 
 </details>
