@@ -1,5 +1,5 @@
 # TDPDNE.Telegram.Bot
-![AppVeyor branch](https://img.shields.io/appveyor/build/Srul1k/tdpdne-telegram-bot/master?logo=appveyor) ![Downloads](https://img.shields.io/github/downloads/cum-foundations/tdpdne-telegram-bot/total?color=blue&label=downloads) ![Visitor Badge](https://visitor-badge.feriirawann.repl.co?username=cum-foundations&repo=tdpdne-telegram-bot&color=blueviolet&style=for-the-badge&label=views&style=badge)
+![.NET build](https://github.com/cum-foundations/tdpdne-telegram-bot/actions/workflows/dotnet-build.yml/badge.svg) ![Docker image build](https://github.com/cum-foundations/tdpdne-telegram-bot/actions/workflows/docker-image-build.yml/badge.svg) ![Docker image publish](https://github.com/cum-foundations/tdpdne-telegram-bot/actions/workflows/docker-image-publish.yml/badge.svg) ![Latest Release](https://img.shields.io/github/release/cum-foundations/tdpdne-telegram-bot.svg?style=flat) ![Downloads](https://img.shields.io/github/downloads/cum-foundations/tdpdne-telegram-bot/total?color=blue&label=downloads) ![Visitor Badge](https://visitor-badge.feriirawann.repl.co?username=cum-foundations&repo=tdpdne-telegram-bot&color=blueviolet&style=for-the-badge&label=views&style=badge)
 
 This is a simple bot for generating dickpics.
 
@@ -11,7 +11,7 @@ Also, due to the inability to have good hardware and as a result of generating n
 
 <br>
 
-![Usage Example](res/usage-example.gif)
+![Usage Example](../res/description-photo.gif)
 
 </details>
 

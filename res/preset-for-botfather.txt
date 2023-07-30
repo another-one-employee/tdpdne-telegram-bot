@@ -18,6 +18,9 @@ Description:
 
 📁 Source code:
 github.com/cum-foundations/tdpdne-telegram-bot
+
+💦 Bot News:
+@cum_foundations
 ----------------------------------------------
 
 
@@ -25,6 +28,6 @@ github.com/cum-foundations/tdpdne-telegram-bot
 Commands:
 ----------------------------------------------
 generate - generate a new dickpic
-support - support contact
+support - support contacts
 donations - links to donations
 ----------------------------------------------
