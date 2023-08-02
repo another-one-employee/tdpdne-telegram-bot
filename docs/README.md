@@ -1,5 +1,5 @@
 <p align="center">
-    <img src="../res/logo.png"
+    <img src="https://raw.githubusercontent.com/cum-foundations/tdpdne-telegram-bot/master/res/logo.png"
         height="148">
 </p>
 
@@ -38,9 +38,9 @@
 <details>
 <summary> ▶️ How to run</summary>
 
-- 🐳 [I'm familiar with Docker](how-to-run-with-docker.md)
+- 🐳 [I'm familiar with Docker](https://github.com/cum-foundations/tdpdne-telegram-bot/blob/master/docs/how-to-run-with-docker.md)
 
-- 🖥️ [I don't know what Docker is](how-to-run-without-docker.md)
+- 🖥️ [I don't know what Docker is](https://github.com/cum-foundations/tdpdne-telegram-bot/blob/master/docs/how-to-run-without-docker.md)
 
 </details>
 
@@ -49,7 +49,7 @@
 
 <br>
 
-![Usage Example](../res/description-photo.gif)
+![Usage Example](https://github.com/cum-foundations/tdpdne-telegram-bot/blob/master/res/usage-example.gif)
 
 </details>
 
@@ -58,8 +58,11 @@
 
 <br>
 
-*If you are not burdened and would like to help us practice [escapism](https://en.wikipedia.org/wiki/Escapism), we would be grateful for donations:*
+*If you are not burdened and would like to help us practice [escapism](https://en.wikipedia.org/wiki/Escapism), we would be grateful for donations.*
 
-💎**Toncoin:** ```EQAq7lYMaMFPcnSvNe5V9XSPtaQy4J2YNMYArGRi3w-VrsuM```
+### 💎Toncoin  
+```bash
+EQAq7lYMaMFPcnSvNe5V9XSPtaQy4J2YNMYArGRi3w-VrsuM
+```
 
 </details>

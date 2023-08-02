@@ -1,4 +1,4 @@
-# 🔧 How to configure *appsettings.json*  
+# 🔧 How to configure  
 
 ## BotConfiguration section
 
@@ -10,6 +10,20 @@
 
 * `"Donations": "{DONATIONS}"`  
     Replace `{DONATIONS}` with your donations details  
+
+### Markdown support
+
+Properties `"BotToken"` and `"Suppor"` support Markdown.  
+You can make the text **Bold**, *Italics*, add an external [link](https://youtu.be/dQw4w9WgXcQ?autoplay=1) and new lines:  
+
+* `*` for `*bold text*`  
+* `_` for `_italics text_`
+* `[]()` for `[text](external-link)`
+* `\n` for new line  
+
+#### ⚠️ About new lines  
+For *settings files*, **use an additional backslash** to escape the backslash (`\\n`).  
+For *environment variables*, save it with a single backslash.
 
 ## WrapperConfiguration section *(💡 not necessary to update)*
 
