@@ -8,18 +8,15 @@
         <img src="https://github.com/cum-foundations/tdpdne-telegram-bot/actions/workflows/dotnet-build.yml/badge.svg" /></a>
     <a alt="Docker image build">
         <img src="https://github.com/cum-foundations/tdpdne-telegram-bot/actions/workflows/docker-image-build.yml/badge.svg" /></a>
-    <a alt="Latest Release">
-        <img src="https://img.shields.io/github/release/cum-foundations/tdpdne-telegram-bot.svg?style=flat&label=Release" /></a>
 </p>
 
 <p align="center">
     <a alt="Hits">
-        <img src="https://visitor-badge.feriirawann.repl.co?username=cum-foundations&repo=tdpdne-telegram-bot&color=salat&label=Hits&style=badge" /></a>
+        <img src="https://visitor-badge.feriirawann.repl.co?username=cum-foundations&repo=tdpdne-telegram-bot&color=blue&label=Hits&style=badge" /></a>
     <a alt="Downloads">
         <img src="https://img.shields.io/github/downloads/cum-foundations/tdpdne-telegram-bot/total?color=blue&label=Downloads" /></a>
-    <a href="https://t.me/cum_foundations">
-        <img src="https://img.shields.io/badge/C.U.M.%20News-2CA5E0?style=flat&logo=telegram&logoColor=white"
-            alt="Telegram channel"></a>
+    <a alt="Latest Release">
+        <img src="https://img.shields.io/github/release/cum-foundations/tdpdne-telegram-bot.svg?style=flat&color=gray&label=Release" /></a>
 </p>
 
 ## This is a simple bot for generating dickpics.
