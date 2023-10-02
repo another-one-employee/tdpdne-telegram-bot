@@ -18,9 +18,6 @@ Description:
 
 📁 Source code:
 github.com/cum-foundations/tdpdne-telegram-bot
-
-💦 Bot News:
-@cum_foundations
 ----------------------------------------------
 
 
