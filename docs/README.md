@@ -12,7 +12,7 @@
 
 <p align="center">
     <a alt="Hits">
-        <img src="https://visitor-badge.feriirawann.repl.co?username=cum-foundations&repo=tdpdne-telegram-bot&color=blue&label=Hits&style=badge" /></a>
+        <img src="https://visitor-badge.imlete.cn/?id=github.cum-foundations.tdpdne-telegram-bot&color=55aef0" /></a>
     <a alt="Downloads">
         <img src="https://img.shields.io/github/downloads/cum-foundations/tdpdne-telegram-bot/total?color=blue&label=Downloads" /></a>
     <a alt="Latest Release">
