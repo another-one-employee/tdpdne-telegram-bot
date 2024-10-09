@@ -1,6 +1,5 @@
 ﻿namespace TDPDNE.Telegram.Bot.Services;
 
-using Abstract;
 using Exceptions;
 using global::Telegram.Bot;
 using global::Telegram.Bot.Exceptions;
@@ -10,33 +9,23 @@ using global::Telegram.Bot.Types.Enums;
 using Microsoft.Extensions.Logging;
 using System;
 using TDPDNE.Telegram.Bot.Configs;
+using TDPDNE.Telegram.Bot.Extensions;
+using TDPDNE.Telegram.Bot.Infrastructure;
 
 public class UpdateHandler : IUpdateHandler
 {
     private readonly ITelegramBotClient _botClient;
+    private readonly TDPDNEDbContext _dbContext;
     private readonly ILogger<UpdateHandler> _logger;
+    private readonly BotConfiguration _botConfiguration;
 
-    private static readonly BotConfiguration BotConfiguration;
-    private static readonly ITDPDNEWrapper Wrapper;
-
-    public UpdateHandler(ITelegramBotClient botClient, ILogger<UpdateHandler> logger)
+    public UpdateHandler(ITelegramBotClient botClient, TDPDNEDbContext dbContext, IConfiguration configuration, ILogger<UpdateHandler> logger)
     {
         _botClient = botClient;
+        _dbContext = dbContext;
+        _botConfiguration = configuration.GetRequiredSection(BotConfiguration.Configuration).Get<BotConfiguration>()!;
+        _botConfiguration.OverrideFromEnvs();
         _logger = logger;
-    }
-
-    static UpdateHandler()
-    {
-        var configuration = new ConfigurationBuilder()
-            .AddJsonFile("appsettings.json", true)
-            .AddJsonFile("appsettings.Development.json", true)
-            .Build();
-
-        BotConfiguration = configuration.GetRequiredSection(BotConfiguration.Configuration).Get<BotConfiguration>() ??
-                           throw new ArgumentNullException(BotConfiguration.Configuration);
-        OverrideBotConfigurationFromEnvironmentVariables(BotConfiguration);
-
-        Wrapper = new TDPDNEWrapper(configuration);
     }
 
     public async Task HandleUpdateAsync(ITelegramBotClient _, Update update, CancellationToken cancellationToken)
@@ -72,7 +61,7 @@ public class UpdateHandler : IUpdateHandler
                                $"first name - {sentMessage.Chat.FirstName}, " +
                                $"last name - {sentMessage.Chat.LastName}");
 
-        static async Task<Message> UploadPicture(ITelegramBotClient botClient, Message message, CancellationToken cancellationToken)
+        async Task<Message> UploadPicture(ITelegramBotClient botClient, Message message, CancellationToken cancellationToken)
         {
             await botClient.SendChatActionAsync(
                 message.Chat.Id,
@@ -81,7 +70,7 @@ public class UpdateHandler : IUpdateHandler
 
             try
             {
-                var content = await Wrapper.GetPicture(cancellationToken);
+                var content = await _dbContext.GetRandomDickpicAsStream();
 
                 return await botClient.SendPhotoAsync(
                     chatId: message.Chat.Id,
@@ -97,10 +86,10 @@ public class UpdateHandler : IUpdateHandler
             }
         }
 
-        static async Task<Message> SendSupport(ITelegramBotClient botClient, Message message, CancellationToken cancellationToken)
+        async Task<Message> SendSupport(ITelegramBotClient botClient, Message message, CancellationToken cancellationToken)
         {
             string text = (@"*Support*:\n" +
-                          $"{BotConfiguration.Support}")
+                          $"{_botConfiguration.Support}")
                 .Replace(@"\n", Environment.NewLine);
 
             return await botClient.SendTextMessageAsync(
@@ -110,10 +99,10 @@ public class UpdateHandler : IUpdateHandler
                 cancellationToken: cancellationToken);
         }
 
-        static async Task<Message> SendDonations(ITelegramBotClient botClient, Message message, CancellationToken cancellationToken)
+        async Task<Message> SendDonations(ITelegramBotClient botClient, Message message, CancellationToken cancellationToken)
         {
             string text = (@"*Donations*:\n" +
-                          $"{BotConfiguration.Donations}")
+                          $"{_botConfiguration.Donations}")
                 .Replace(@"\n", Environment.NewLine);
 
             return await botClient.SendTextMessageAsync(
@@ -123,7 +112,7 @@ public class UpdateHandler : IUpdateHandler
                 cancellationToken: cancellationToken);
         }
 
-        static async Task<Message> Usage(ITelegramBotClient botClient, Message message, CancellationToken cancellationToken)
+        async Task<Message> Usage(ITelegramBotClient botClient, Message message, CancellationToken cancellationToken)
         {
             const string usage = "*Usage*:\n" +
                                  "/generate \\- _generate a new dickpic_\n" +
@@ -157,12 +146,5 @@ public class UpdateHandler : IUpdateHandler
         // Cooldown in case of network connection error
         if (exception is RequestException)
             await Task.Delay(TimeSpan.FromSeconds(2), cancellationToken);
-    }
-
-    private static void OverrideBotConfigurationFromEnvironmentVariables(BotConfiguration botConfiguration)
-    {
-        botConfiguration.BotToken = Environment.GetEnvironmentVariable("BotConfiguration__BotToken") ?? botConfiguration.BotToken;
-        botConfiguration.Support = Environment.GetEnvironmentVariable("BotConfiguration__Support") ?? botConfiguration.Support;
-        botConfiguration.Donations = Environment.GetEnvironmentVariable("BotConfiguration__Donations") ?? botConfiguration.Donations;
     }
 }

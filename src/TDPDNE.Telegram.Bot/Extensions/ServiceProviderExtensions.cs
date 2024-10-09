@@ -1,9 +1,9 @@
-namespace TDPDNE.Telegram.Bot;
+namespace TDPDNE.Telegram.Bot.Extensions;
 
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 
-public static class Extensions
+public static class ServiceProviderExtensions
 {
     public static T GetConfiguration<T>(this IServiceProvider serviceProvider)
         where T : class
