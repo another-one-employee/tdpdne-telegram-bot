@@ -67,7 +67,7 @@ public class TDPDNEWrapper : ITDPDNEWrapper
         using var image = new MagickImage(stream: stream);
         image.ColorFuzz = new Percentage(_configuration.MagickFuzzPercentage);
         image.Trim();
-        image.RePage();
+        image.ResetPage();
         
         return new MemoryStream(image.ToByteArray());
     }
