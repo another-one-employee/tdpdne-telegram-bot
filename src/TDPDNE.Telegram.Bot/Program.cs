@@ -1,10 +1,13 @@
 ﻿namespace TDPDNE.Telegram.Bot;
 
 using global::Telegram.Bot;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Serilog;
 using TDPDNE.Telegram.Bot.Configs;
+using TDPDNE.Telegram.Bot.Extensions;
+using TDPDNE.Telegram.Bot.Infrastructure;
 using TDPDNE.Telegram.Bot.Services;
 
 internal class Program
@@ -15,7 +18,7 @@ internal class Program
             .ConfigureServices((context, services) =>
             {
                 services.Configure<BotConfiguration>(
-                    context.Configuration.GetSection(BotConfiguration.Configuration));
+                            context.Configuration.GetSection(BotConfiguration.Configuration));
 
                 services.AddHttpClient("telegram_bot_client")
                         .AddTypedClient<ITelegramBotClient>((httpClient, serviceProvider) =>
@@ -24,6 +27,9 @@ internal class Program
                             TelegramBotClientOptions options = new(botConfig.BotToken);
                             return new TelegramBotClient(options, httpClient);
                         });
+
+                services.AddDbContext<TDPDNEDbContext>(options =>
+                            options.UseSqlServer(context.Configuration.GetConnectionString(nameof(TDPDNEDbContext))));
 
                 services.AddScoped<UpdateHandler>();
                 services.AddScoped<ReceiverService>();
